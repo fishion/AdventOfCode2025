@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Compiled javascript
+*.js
+!eslint.config.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test coverage
+coverage/
