@@ -6,7 +6,7 @@ export interface answerObject {
   pt2: number | bigint | string
 }
 
-export class PuzzleBase {
+export default class PuzzleBase {
   isTest: boolean
   debug: boolean
   input: string[]

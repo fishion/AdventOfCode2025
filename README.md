@@ -2,7 +2,7 @@
 
 ## Run
 
-npx tsx advent-of-code `daynumber` [test]
+npx tsx advent-of-code `daynumber` [test] [debug]
 
 ## Links
 
