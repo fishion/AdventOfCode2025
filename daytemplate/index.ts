@@ -1,22 +1,15 @@
-import PuzzleBase, {type answerObject } from "../lib/puzzle-base.ts"
+import PuzzleBase, { type answerObject } from "../lib/puzzle-base.ts"
 
 class Puzzle extends PuzzleBase {
-  testAns: answerObject = {pt1 : 1, pt2 : 1}
+  testAns: answerObject = { pt1: 1, pt2: 1 }
 
-  constructor(day?:number) {
+  constructor(day?: number) {
     super(day)
   }
 
-  preProcess(){
-
-  }
-  pt1(){
-
-  }
-  pt2(){
-
-  }
-
+  preProcess() {}
+  pt1() {}
+  pt2() {}
 }
 
 const puzzle = new Puzzle()

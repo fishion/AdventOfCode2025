@@ -9,12 +9,12 @@
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     // "outDir": "build",                     /* Redirect output structure to the directory. */
     // "rootDir": "src",                      /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-    
-    "noEmit" : true, /* Enable this as will be running as typescript without compiling to js */
-    "allowImportingTsExtensions" : true, /* Enable this as will be running as typescript without compiling to js */
+
+    "noEmit": true /* Enable this as will be running as typescript without compiling to js */,
+    "allowImportingTsExtensions": true /* Enable this as will be running as typescript without compiling to js */,
 
     /* Module Resolution Options */
-    "moduleResolution": "NodeNext"  /*  */,
+    "moduleResolution": "NodeNext" /*  */,
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
