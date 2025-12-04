@@ -1,6 +1,10 @@
 import * as fs from "fs"
 import * as path from "path"
 
+const FgRed = "\x1b[31m"
+const FgGreen = "\x1b[32m"
+const ColReset = "\x1b[0m"
+
 export interface answerObject {
   pt1: number | bigint | string
   pt2: number | bigint | string
@@ -26,11 +30,17 @@ export default class PuzzleBase {
   }
 
   answer() {
-    const pt1Result =
-      this.ans.pt1 == this.testAns.pt1 ? ", Correct" : `, expected '${this.testAns.pt1}'`
-    const pt2Result =
-      this.ans.pt2 == this.testAns.pt2 ? ", Correct" : `, expected '${this.testAns.pt2}'`
-    console.log(`Pt 1 : Got ${this.ans.pt1} ${this.isTest ? pt1Result : ""}`)
-    console.log(`Pt 2 : Got ${this.ans.pt2} ${this.isTest ? pt2Result : ""}`)
+    ;[1, 2].forEach(partNo => {
+      const ptKey = `pt${partNo}` as keyof answerObject
+      let outStr = `Pt ${partNo} result = ${this.ans[ptKey]}`
+      if (this.isTest) {
+        outStr +=
+          this.ans[ptKey] == this.testAns[ptKey]
+            ? ` : ${FgGreen}Correct`
+            : ` : ${FgRed}Expected '${this.testAns[ptKey]}'`
+        outStr += ColReset
+      }
+      console.log(outStr)
+    })
   }
 }
