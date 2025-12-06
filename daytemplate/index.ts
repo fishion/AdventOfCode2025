@@ -7,13 +7,13 @@ class Puzzle extends PuzzleBase {
     super(day)
   }
 
-  preProcess() {}
-  pt1() {}
-  pt2() {}
+  pt1() {
+    this.debugOut(`running pt1`)
+  }
+  pt2() {
+    this.debugOut(`running pt2`)
+  }
 }
 
 const puzzle = new Puzzle()
-puzzle.preProcess()
-puzzle.pt1()
-puzzle.pt2()
-puzzle.answer()
+puzzle.run()

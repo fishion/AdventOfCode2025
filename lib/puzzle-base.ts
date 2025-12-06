@@ -10,7 +10,7 @@ export interface answerObject {
   pt2: number | bigint | string
 }
 
-export default class PuzzleBase {
+export default abstract class PuzzleBase {
   isTest: boolean
   debug: boolean
   input: string[]
@@ -28,6 +28,15 @@ export default class PuzzleBase {
   debugOut(debugstr: unknown) {
     if (this.debug) console.log(debugstr)
   }
+
+  run() {
+    this.pt1()
+    this.pt2()
+    this.answer()
+  }
+
+  abstract pt1(): void
+  abstract pt2(): void
 
   answer() {
     ;[1, 2].forEach(partNo => {
