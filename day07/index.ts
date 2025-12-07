@@ -6,10 +6,11 @@ interface Cell {
   isEmpty: boolean
   isSplitter: boolean
   hasBeam?: boolean
+  beamCount: number
 }
 
 class Puzzle extends PuzzleBase {
-  testAns: answerObject = { pt1: 21, pt2: 1 }
+  testAns: answerObject = { pt1: 21, pt2: 40 }
   manifold: Cell[][] = []
 
   constructor(day?: number) {
@@ -24,6 +25,7 @@ class Puzzle extends PuzzleBase {
           isEmpty: char == ".",
           isSplitter: char == "^",
           hasBeam: char == "S",
+          beamCount: char == "S" ? 1 : 0,
         })
       })
     })
@@ -32,7 +34,7 @@ class Puzzle extends PuzzleBase {
 
   drawMap() {
     this.manifold.forEach(row => {
-      this.debugOut(row.map(el => el.char).join(""))
+      this.debugOut(row.map(el => el.beamCount || el.char).join(""))
     })
   }
 
@@ -41,10 +43,16 @@ class Puzzle extends PuzzleBase {
     for (let i = 1; i < this.manifold.length; i++) {
       this.manifold[i].forEach((cell, cIndex) => {
         if (this.manifold[i - 1][cIndex].hasBeam) {
-          if (cell.isEmpty) cell.hasBeam = true
+          const carriedBeams = this.manifold[i - 1][cIndex].beamCount
+          if (cell.isEmpty) {
+            cell.hasBeam = true
+            cell.beamCount += carriedBeams
+          }
           if (cell.isSplitter) {
             this.manifold[i][cIndex - 1].hasBeam = true
+            this.manifold[i][cIndex - 1].beamCount += carriedBeams
             this.manifold[i][cIndex + 1].hasBeam = true
+            this.manifold[i][cIndex + 1].beamCount += carriedBeams
             this.ans.pt1 = <number>this.ans.pt1 + 1
           }
         }
@@ -53,6 +61,11 @@ class Puzzle extends PuzzleBase {
   }
   pt2() {
     this.debugOut(`running pt2`)
+    // should just be able to count total summed beamcount on bottom row
+    this.drawMap()
+    this.manifold[this.manifold.length - 1].forEach(cell => {
+      this.ans.pt2 = <number>this.ans.pt2 + cell.beamCount
+    })
   }
 }
 
