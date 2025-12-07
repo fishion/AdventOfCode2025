@@ -1,12 +1,21 @@
 import PuzzleBase, { type answerObject } from "../lib/puzzle-base.ts"
 
-interface Cell {
-  char: string
-  isStart: boolean
-  isEmpty: boolean
-  isSplitter: boolean
-  hasBeam?: boolean
-  beamCount: number
+class Cell {
+  char: string = "."
+  beamCount: number = 0
+  constructor(char: string) {
+    this.char = char
+    if (char == "S") this.beamCount = 1
+  }
+  isEmpty() {
+    return this.char == "."
+  }
+  isSplitter() {
+    return this.char == "^"
+  }
+  hasBeam() {
+    return this.beamCount > 0
+  }
 }
 
 class Puzzle extends PuzzleBase {
@@ -19,14 +28,7 @@ class Puzzle extends PuzzleBase {
     this.input.forEach((row, rIndex) => {
       this.manifold.push([])
       row.split("").forEach(char => {
-        this.manifold[rIndex].push({
-          char,
-          isStart: char == "S",
-          isEmpty: char == ".",
-          isSplitter: char == "^",
-          hasBeam: char == "S",
-          beamCount: char == "S" ? 1 : 0,
-        })
+        this.manifold[rIndex].push(new Cell(char))
       })
     })
     this.drawMap()
@@ -42,16 +44,13 @@ class Puzzle extends PuzzleBase {
     this.debugOut(`running pt1`)
     for (let i = 1; i < this.manifold.length; i++) {
       this.manifold[i].forEach((cell, cIndex) => {
-        if (this.manifold[i - 1][cIndex].hasBeam) {
+        if (this.manifold[i - 1][cIndex].hasBeam()) {
           const carriedBeams = this.manifold[i - 1][cIndex].beamCount
-          if (cell.isEmpty) {
-            cell.hasBeam = true
+          if (cell.isEmpty()) {
             cell.beamCount += carriedBeams
           }
-          if (cell.isSplitter) {
-            this.manifold[i][cIndex - 1].hasBeam = true
+          if (cell.isSplitter()) {
             this.manifold[i][cIndex - 1].beamCount += carriedBeams
-            this.manifold[i][cIndex + 1].hasBeam = true
             this.manifold[i][cIndex + 1].beamCount += carriedBeams
             this.ans.pt1 = <number>this.ans.pt1 + 1
           }
