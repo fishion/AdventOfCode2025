@@ -75,11 +75,10 @@ class Puzzle extends PuzzleBase {
       this.wirePair(pair)
     })
     this.debugOut(this.circuits)
-    this.ans.pt1 = 1
-    this.circuits
+    this.ans.pt1 = this.circuits
       .sort((a, b) => Object.keys(b).length - Object.keys(a).length)
       .slice(0, 3)
-      .forEach(circuit => (this.ans.pt1 = <number>this.ans.pt1 * Object.keys(circuit).length))
+      .reduce((sum, circuit) => sum * Object.keys(circuit).length, 1)
   }
   pt2() {
     this.debugOut(`running pt2`)

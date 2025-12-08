@@ -24,7 +24,7 @@ class Puzzle extends PuzzleBase {
     this.debugOut(this.ranges)
   }
 
-  bothParts() {
+  pt1() {
     this.ranges.forEach(range => {
       for (let i = range.start; i <= range.end; i++) {
         if (/^(.*)\1$/.exec(`${i}`) != null) {
@@ -38,8 +38,10 @@ class Puzzle extends PuzzleBase {
       }
     })
   }
+  pt2() {
+    /* all done in part1 */
+  }
 }
 
 const puzzle = new Puzzle()
-puzzle.bothParts()
-puzzle.answer()
+puzzle.run()

@@ -64,6 +64,4 @@ class Puzzle extends PuzzleBase {
 }
 
 const puzzle = new Puzzle()
-puzzle.pt1()
-puzzle.pt2()
-puzzle.answer()
+puzzle.run()

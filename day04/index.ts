@@ -73,9 +73,4 @@ class Puzzle extends PuzzleBase {
 }
 
 const puzzle = new Puzzle()
-puzzle.pt1()
-puzzle.pt2()
-puzzle.answer()
-
-//Pt 1 : Got 1411
-//Pt 2 : Got 8557
+puzzle.run()
